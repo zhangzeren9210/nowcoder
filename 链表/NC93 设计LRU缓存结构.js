@@ -4,6 +4,12 @@
  * @param k int整型 the k
  * @return int整型一维数组
  */
+/**
+ * lru design
+ * @param operators int整型二维数组 the ops
+ * @param k int整型 the k
+ * @return int整型一维数组
+ */
 function ListNode(key, val) {
   this.val = val;
   this.key = key;
@@ -42,7 +48,7 @@ function LRU(operators, k) {
       }
     } else {
       node.val = value;
-      addToHead(node);
+      moveToHead(node);
     }
   }
   function get(key) {
@@ -76,15 +82,3 @@ function LRU(operators, k) {
 module.exports = {
   LRU: LRU,
 };
-
-function ReverseList(pHead) {
-  let prev = null,
-    curr = pHead;
-  while (curr) {
-    let next = curr.next;
-    curr.next = prev;
-    prev = curr;
-    curr = next;
-  }
-  return prev;
-}
