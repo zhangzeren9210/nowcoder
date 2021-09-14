@@ -12,8 +12,8 @@
  * @return ListNode类
  */
 function reverseKGroup(head, k) {
+  // leetcode 25
   let curr = head;
-  // write code here
   for (let i = 0; i < k; i++) {
     if (!curr) return head;
     curr = curr.next;
@@ -22,9 +22,10 @@ function reverseKGroup(head, k) {
   head.next = reverseKGroup(curr, k);
   return result;
 }
+
 function reverse(head, tail) {
-  let curr = head;
-  let prev = tail;
+  let curr = head,
+    prev = null;
   while (curr != tail) {
     let next = curr.next;
     curr.next = prev;
@@ -33,6 +34,7 @@ function reverse(head, tail) {
   }
   return prev;
 }
+
 module.exports = {
   reverseKGroup: reverseKGroup,
 };
