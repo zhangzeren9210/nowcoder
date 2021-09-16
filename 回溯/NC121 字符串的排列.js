@@ -4,34 +4,28 @@
  */
 var Permutation = function (s) {
   // leetcode剑指 Offer 38. 字符串的排列
-  let n = s.length;
-  let arr = Array.from(s).sort();
-  let visited = new Array(n).fill(false);
   let result = [];
-  let tmp = [];
-  function dfs(tmp) {
-    if (tmp.length === n) {
-      result.push([...tmp]);
-      return;
+  let arr = Array.from(s).sort();
+  const size = arr.length;
+  const visited = new Array(arr.length).fill(false);
+  function dfs(list) {
+    if (list.length === size) {
+      // 深拷贝list
+      return result.push([...list]);
     }
-    for (let i = 0; i < n; i++) {
-      if (visited[i] || (!visited[i - 1] && arr[i] === arr[i - 1])) {
+    for (let i = 0; i < arr.length; i++) {
+      if (visited[i] || (i > 0 && arr[i] === arr[i - 1] && !visited[i - 1])) {
         continue;
       }
       visited[i] = true;
-      tmp.push(arr[i]);
-      dfs(tmp);
+      list.push(arr[i]);
+      dfs(list);
       visited[i] = false;
-      tmp.pop();
+      list.pop();
     }
   }
-  dfs(tmp);
-  let size = result.length;
-  let test = new Array(size).fill(0);
-  for (let i = 0; i < size; i++) {
-    test[i] = result[i].join("");
-  }
-  return test;
+  dfs([]);
+  return result.map((item) => item.join(""));
 };
 module.exports = {
   Permutation: Permutation,
